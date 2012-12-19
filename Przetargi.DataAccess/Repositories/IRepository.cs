@@ -10,8 +10,8 @@ namespace Przetargi.DataAccess.Repositories
     public interface IRepository
     {
         /*** Users ***/
-        User CreateUser(User user);
-        User AuthenticateUser(string userName, string password);
+        User CreateUser(User user, string password);
+        User AuthenticateUser(string userName, string password, UserType type);
 
         /*** Tenders ***/
         List<TenderOffer> GetOffersForTender(int tenderId);

@@ -11,56 +11,57 @@ namespace Przetargi.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Bieżące hasło")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi składać się przynajmniej z {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź nowe hasło")]
+        [Compare("NewPassword", ErrorMessage = "Nowe hasło i jego potwierdzenie muszą być identyczne.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Nazwa użytkownika")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamiętaj mnie")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [StringLength(30, ErrorMessage = "{0} musi składać się przynajmniej z {2} znaków.", MinimumLength = 3)]
+        [Display(Name = "Nazwa użytkownika")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address")]
+        [Display(Name = "Adres Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musi składać się przynajmniej z {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź hasło")]
+        [Compare("Password", ErrorMessage = "Hasło i jego potwierdzenie muszą być identyczne.")]
         public string ConfirmPassword { get; set; }
     }
 }

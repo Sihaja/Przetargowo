@@ -24,18 +24,63 @@ namespace Przetargi.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult LoginOwner(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult LoginAttendee(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
         //
         // POST: /Account/Login
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult LoginAttendee(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 //if (Membership.ValidateUser(model.UserName, model.Password))
-                var authenticatedUser = Repository.Instance.AuthenticateUser(model.UserName, model.Password);
+                var authenticatedUser = Repository.Instance.AuthenticateUser(model.UserName, model.Password, UserType.TenderAttendee);
                 if(authenticatedUser != null)
+                {
+                    CurrentUser = authenticatedUser;
+
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult LoginOwner(LoginModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                //if (Membership.ValidateUser(model.UserName, model.Password))
+                var authenticatedUser = Repository.Instance.AuthenticateUser(model.UserName, model.Password, UserType.TenderOwner);
+                if (authenticatedUser != null)
                 {
                     CurrentUser = authenticatedUser;
 
@@ -67,17 +112,17 @@ namespace Przetargi.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        [AllowAnonymous]
+        public ActionResult RegisterOwner()
+        {
+            return View();
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -89,7 +134,10 @@ namespace Przetargi.Controllers
                 {
                     var createdUser = Repository.Instance.CreateUser(new TenderOwnerUser
                     {
-                    });
+                        Name = model.UserName,
+                        Email = model.Email,
+                        Status = UserStatus.NewInactive
+                    }, model.Password);
 
                     CurrentUser = createdUser;
 
@@ -105,6 +153,12 @@ namespace Przetargi.Controllers
         }
 
         [AllowAnonymous]
+        public ActionResult RegisterAttendee()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult RegisterAttendee(RegisterModel model)
         {
@@ -114,7 +168,10 @@ namespace Przetargi.Controllers
                 {
                     var createdUser = Repository.Instance.CreateUser(new TenderAttendeeUser
                     {
-                    });
+                        Name = model.UserName,
+                        Email = model.Email,
+                        Status = UserStatus.NewInactive
+                    }, model.Password);
 
                     CurrentUser = createdUser;
 

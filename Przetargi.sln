@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Przetargi", "Przetargi\Prze
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Przetargi.Data", "Przetargi.DataAccess\Przetargi.Data.csproj", "{CA97012E-79D8-4495-80DE-D1247B33A5B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Przetargi.ExternalAccess", "Przetargi.ExternalAccess\Przetargi.ExternalAccess.csproj", "{DCC7E043-7DEE-4701-8081-CCD2524D48A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{CA97012E-79D8-4495-80DE-D1247B33A5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA97012E-79D8-4495-80DE-D1247B33A5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA97012E-79D8-4495-80DE-D1247B33A5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC7E043-7DEE-4701-8081-CCD2524D48A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC7E043-7DEE-4701-8081-CCD2524D48A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC7E043-7DEE-4701-8081-CCD2524D48A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC7E043-7DEE-4701-8081-CCD2524D48A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

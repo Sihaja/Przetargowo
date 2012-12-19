@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CA97012E-79D8-4495-80DE-D1247B33A5B9}</ProjectGuid>
+    <ProjectGuid>{DCC7E043-7DEE-4701-8081-CCD2524D48A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Przetargi.DataAccess</RootNamespace>
-    <AssemblyName>Przetargi.DataAccess</AssemblyName>
+    <RootNamespace>Przetargi.ExternalAccess</RootNamespace>
+    <AssemblyName>Przetargi.ExternalAccess</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,27 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Models\Tenders\Tender.cs" />
-    <Compile Include="Models\Tenders\TenderOffer.cs" />
-    <Compile Include="Models\Users\TenderAttendeeUser.cs" />
-    <Compile Include="Models\Users\TenderOwnerUser.cs" />
-    <Compile Include="Models\Users\User.cs" />
-    <Compile Include="Models\Users\UserStatus.cs" />
-    <Compile Include="Models\Users\UserType.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\SqlRepository.cs" />
+    <Compile Include="Email\IMailer.cs" />
+    <Compile Include="Email\Mailer.cs" />
+    <Compile Include="Message\MessageBase.cs" />
+    <Compile Include="Message\ResultType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\SqlRepositoryTender.cs" />
-    <Compile Include="Repositories\SqlRepositoryUser.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Przetargi.ExternalAccess\Przetargi.ExternalAccess.csproj">
-      <Project>{DCC7E043-7DEE-4701-8081-CCD2524D48A5}</Project>
-      <Name>Przetargi.ExternalAccess</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

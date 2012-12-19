@@ -5,41 +5,17 @@
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+    <h1>Wybierz typ konta.</h1>
 </hgroup>
 
-<p class="message-info">
-    Passwords must be at least @Membership.MinRequiredPasswordLength characters long.
-</p>
+<div class="message-info">
+    <ul>
+        <li>Konto uczestnika pozwoli Ci przeglądać, zapoznawać się i brać udział w odbywających się przetargach</li>
+        <li>Konto właściciela pozwoli Ci tworzyć i przeprowadzać przetargi, ułatwi zarządzanie widocznością elementów i składowanie dokumentów.</li>
+    </ul>
+</div>
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary()
-
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Email)
-                @Html.TextBoxFor(m => m.Email)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
-        <input type="submit" value="Register" />
-    </fieldset>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div class="section">
+    @Html.ActionLink("Konto uczestnika", "RegisterAttendee", null, new { @class = "button green radius" })
+    @Html.ActionLink("Konto właściciela", "RegisterOwner", null, new { @class = "button blue radius" })
+</div>

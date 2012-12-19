@@ -221,7 +221,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -240,6 +242,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\_OwnerIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\RegisterAttendee.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\RegisterOwner.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\LoginAttendee.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\LoginOwner.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

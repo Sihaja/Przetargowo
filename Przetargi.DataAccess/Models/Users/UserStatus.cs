@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Przetargi.DataAccess.Models.Users
 {
-    public enum UserType
+    public enum UserStatus
     {
-        TenderOwner = 1,
-        TenderAttendee = 2,
-        Administrator = 3
+        NewInactive = 1,
+        Active = 2,
+        Inactive = 3,
+        Blocked = 4,
     }
 }

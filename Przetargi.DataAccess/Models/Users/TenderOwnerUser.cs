@@ -7,5 +7,6 @@ namespace Przetargi.DataAccess.Models.Users
 {
     public class TenderOwnerUser : User
     {
+        public override UserType Type { get { return UserType.TenderOwner; } }
     }
 }

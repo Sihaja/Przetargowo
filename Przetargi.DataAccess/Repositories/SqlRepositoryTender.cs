@@ -15,6 +15,8 @@ namespace Przetargi.DataAccess.Repositories
 
         public List<Tender> GetTenders(int? tenderId, string tenderName, DateTime? from, DateTime? to, int? byOwnerId, int? top)
         {
+            return new List<Tender>();
+
             throw new NotImplementedException();
         }
 
