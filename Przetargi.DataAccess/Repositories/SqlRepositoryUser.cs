@@ -43,7 +43,14 @@ namespace Przetargi.DataAccess.Repositories
                         new SqlParameter("@name", user.Name),
                         new SqlParameter("@password", password),
                         new SqlParameter("@email", user.Email),
+                        new SqlParameter("@firstName", user.FirstName),
+                        new SqlParameter("@lastName", user.LastName),
                         new SqlParameter("@activationToken", token),
+                        new SqlParameter("@telNo", user.TelephoneNumber),
+                        new SqlParameter("@nip", user.NIP.Replace(",", "").Replace(" ", "")),
+                        new SqlParameter("@krs", user.KRS + "  Wydział Gospodarczy KRS"),
+                        new SqlParameter("@regon", user.REGON),
+                        new SqlParameter("@companyName", user.CompanyName)
                     });
 
                     comm.ExecuteNonQuery();
@@ -76,6 +83,8 @@ namespace Przetargi.DataAccess.Repositories
                         new SqlParameter("@password", password),
                         new SqlParameter("@email", user.Email),
                         new SqlParameter("@activationToken", token),
+                        new SqlParameter("@firstName", user.FirstName),
+                        new SqlParameter("@lastName", user.LastName)
                     });
 
                     comm.ExecuteNonQuery();
@@ -110,13 +119,80 @@ namespace Przetargi.DataAccess.Repositories
                     {
                         dr.Read();
 
-                        return new TenderAttendeeUser
+                        User user = null;
+
+                        if (type == UserType.TenderAttendee)
                         {
-                            Id = (int)dr["Id"],
-                            Email = (string)dr["Email"].NullIfDbNull(),
-                            Name = (string)dr["Name"],
-                            Status = (UserStatus)dr["Status"],
-                        };
+                            user = new TenderAttendeeUser
+                            {
+                                Id = (int)dr["Id"],
+                                Email = (string)dr["Email"].NullIfDbNull(),
+                                Name = (string)dr["Name"],
+                                Status = (UserStatus)dr["Status"],
+                            };
+                        }
+                        else if (type == UserType.TenderOwner)
+                        {
+                            user = new TenderOwnerUser
+                            {
+                                Id = (int)dr["Id"],
+                                Email = (string)dr["Email"].NullIfDbNull(),
+                                Name = (string)dr["Name"],
+                                Status = (UserStatus)dr["Status"],
+                            };
+                        }
+
+                        return user;
+                    }
+                }
+            }
+        }
+
+        public User GetUser(string userName)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand comm = conn.CreateCommand())
+                {
+                    comm.CommandType = System.Data.CommandType.StoredProcedure;
+                    comm.CommandText = "[GetUser]";
+
+                    comm.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@name", userName),
+                    });
+
+                    using (SqlDataReader dr = comm.ExecuteReader())
+                    {
+                        dr.Read();
+
+                        User user = null;
+                        var type = (UserType)Int32.Parse(dr["Type"].ToString());
+
+                        if (type == UserType.TenderAttendee)
+                        {
+                            user = new TenderAttendeeUser
+                            {
+                                Id = (int)dr["Id"],
+                                Email = (string)dr["Email"].NullIfDbNull(),
+                                Name = (string)dr["Name"],
+                                Status = (UserStatus)dr["Status"],
+                            };
+                        }
+                        else if (type == UserType.TenderOwner)
+                        {
+                            user = new TenderOwnerUser
+                            {
+                                Id = (int)dr["Id"],
+                                Email = (string)dr["Email"].NullIfDbNull(),
+                                Name = (string)dr["Name"],
+                                Status = (UserStatus)dr["Status"],
+                            };
+                        }
+
+                        return user;
                     }
                 }
             }

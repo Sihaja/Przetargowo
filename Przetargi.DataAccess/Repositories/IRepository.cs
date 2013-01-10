@@ -11,11 +11,13 @@ namespace Przetargi.DataAccess.Repositories
     {
         /*** Users ***/
         User CreateUser(User user, string password);
+        User GetUser(string name);
         User AuthenticateUser(string userName, string password, UserType type);
 
         /*** Tenders ***/
-        List<TenderOffer> GetOffersForTender(int tenderId);
-        List<Tender> GetTenders(int? tenderId, string tenderName, DateTime? from, DateTime? to, int? byOwnerId, int? top);
-        void AddTenderOffer(Tender tender, TenderOffer tenderOffer);
+        List<TenderOffer> GetOffersForTender(int? tenderId = null, int? attendeeId = null, DateTime? postedFrom = null, DateTime? postedTo = null, int? top = 10, int? page = 0);
+        List<Tender> GetTenders(int? tenderId = null, string tenderName = null, DateTime? from = null, DateTime? to = null, int? byOwnerId = null, int? top = null, int? page = null);
+        int AddTender(Tender tender);
+        void AddTenderOffer(TenderOffer tenderOffer);
     }
 }

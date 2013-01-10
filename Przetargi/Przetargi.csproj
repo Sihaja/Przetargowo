@@ -48,7 +48,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -128,13 +127,19 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Extension\PrzetargiAbstractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TenderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AuthorizedOnlyAttribute.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\HomeAttendeeModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\HomeOwnerModel.cs" />
+    <Compile Include="Models\ParticipateResult.cs" />
+    <Compile Include="Models\ParticipateViewModel.cs" />
+    <Compile Include="Models\TenderListViewModel.cs" />
+    <Compile Include="Models\TenderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +260,18 @@
   <ItemGroup>
     <Content Include="Views\Account\LoginOwner.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tender\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tender\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tender\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tender\Participate.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -271,7 +288,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>5238</DevelopmentServerPort>
+          <DevelopmentServerPort>14632</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -1,0 +1,67 @@
+﻿@model Przetargi.Models.TenderViewModel
+
+@{
+    ViewBag.Title = "Szczegóły przetargu.";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <div style="float:left;">
+        <h3>Dane przetargu</h3>
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.Tender.ProjectName)
+                <span>@Model.Tender.ProjectName</span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ProjectBudget)
+                <span>@Model.Tender.ProjectBudget</span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.EndingDate)
+                <span class="datestatic">&nbsp;</span>
+            </li>
+        </ul>
+    </div>
+    <div style="float: right;">
+        <h3>Dane osoby kontaktowej</h3>
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonFirstName)
+                <span>@Model.Tender.ContactPersonFirstName</span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonLastName)
+                <span>@Model.Tender.ContactPersonLastName</span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonTelNo)
+                <span>@Model.Tender.ContactPersonTelNo</span>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonEmail)
+                <span>@Model.Tender.ContactPersonEmail</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $(function () {
+            var date = '@Model.Tender.EndingDate.Month/@Model.Tender.EndingDate.Day/@Model.Tender.EndingDate.Year';
+            $('.datestatic').datepicker({ firstday: 1, disabled: true, inline: true, defaultDate: date });
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        div.ui-datepicker {
+            font-size: 72.5%;
+        }
+    </style>
+}

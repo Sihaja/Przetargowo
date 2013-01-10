@@ -1,0 +1,63 @@
+﻿@model Przetargi.Models.TenderViewModel
+
+@{
+    ViewBag.Title = "Utwórz przetarg";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Wprowadź dane przetargu</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Tender.ProjectName)
+                @Html.TextBoxFor(m => m.Tender.ProjectName)
+                @Html.ValidationMessageFor(m => m.Tender.ProjectName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ProjectBudget)
+                @Html.TextBoxFor(m => m.Tender.ProjectBudget)
+                @Html.ValidationMessageFor(m => m.Tender.ProjectBudget)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.EndingDate)
+                @Html.TextBoxFor(m => m.Tender.EndingDate, new { @class = "datepicker" })
+                @Html.ValidationMessageFor(m => m.Tender.EndingDate)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonFirstName)
+                @Html.TextBoxFor(m => m.Tender.ContactPersonFirstName)
+                @Html.ValidationMessageFor(m => m.Tender.ContactPersonFirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonLastName)
+                @Html.TextBoxFor(m => m.Tender.ContactPersonLastName)
+                @Html.ValidationMessageFor(m => m.Tender.ContactPersonLastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonTelNo)
+                @Html.TextBoxFor(m => m.Tender.ContactPersonTelNo)
+                @Html.ValidationMessageFor(m => m.Tender.ContactPersonTelNo)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tender.ContactPersonEmail)
+                @Html.TextBoxFor(m => m.Tender.ContactPersonEmail)
+                @Html.ValidationMessageFor(m => m.Tender.ContactPersonEmail)
+            </li>
+        </ol>
+        <input type="submit" value="Zarejestruj" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({ firstday: 1, minDate: 0, dateFormat: "yy-mm-dd" });
+        });
+    </script>
+}

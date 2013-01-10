@@ -22,7 +22,7 @@ namespace Przetargi.Controllers
             if (IsAttendee)
                 return IndexAttendee();
 
-            var tenders = Repository.Instance.GetTenders(null, null, DateTime.Now, null, null, 5);
+            var tenders = Repository.Instance.GetTenders(null, null, DateTime.Now, null, null, 5, null);
 
             return View("Index", new HomeModel
             {
@@ -32,8 +32,8 @@ namespace Przetargi.Controllers
 
         private ActionResult IndexOwner()
         {
-            var tenders = Repository.Instance.GetTenders(null, null, DateTime.Now, null, null, 5);
-            var myTenders = Repository.Instance.GetTenders(null, null, null, null, CurrentUser.Id, 5);
+            var tenders = Repository.Instance.GetTenders(null, null, DateTime.Now, null, null, 5, null);
+            var myTenders = Repository.Instance.GetTenders(null, null, null, null, CurrentUser.Id, 5, null);
 
             return View("Index", new HomeOwnerModel
             {
@@ -44,7 +44,7 @@ namespace Przetargi.Controllers
 
         private ActionResult IndexAttendee()
         {
-            var tenders = Repository.Instance.GetTenders(null, null, DateTime.Now, null, null, 5);
+            var tenders = Repository.Instance.GetTenders(null, null, DateTime.Now, null, null, 5, null);
             var interestingTenders = new List<Tender>();
 
             return View("Index", new HomeAttendeeModel

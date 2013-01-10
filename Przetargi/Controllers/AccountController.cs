@@ -47,11 +47,10 @@ namespace Przetargi.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (Membership.ValidateUser(model.UserName, model.Password))
                 var authenticatedUser = Repository.Instance.AuthenticateUser(model.UserName, model.Password, UserType.TenderAttendee);
                 if(authenticatedUser != null)
                 {
-                    CurrentUser = authenticatedUser;
+                    OnLogin(authenticatedUser, model.RememberMe);
 
                     if (Url.IsLocalUrl(returnUrl))
                     {
@@ -82,7 +81,7 @@ namespace Przetargi.Controllers
                 var authenticatedUser = Repository.Instance.AuthenticateUser(model.UserName, model.Password, UserType.TenderOwner);
                 if (authenticatedUser != null)
                 {
-                    CurrentUser = authenticatedUser;
+                    OnLogin(authenticatedUser, model.RememberMe);
 
                     if (Url.IsLocalUrl(returnUrl))
                     {
@@ -108,7 +107,7 @@ namespace Przetargi.Controllers
 
         public ActionResult LogOff()
         {
-            CurrentUser = null;
+            OnLogout();
             return RedirectToAction("Index", "Home");
         }
 
@@ -126,20 +125,15 @@ namespace Przetargi.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult RegisterOwner(RegisterModel model)
+        public ActionResult RegisterOwner(RegisterOwnerModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var createdUser = Repository.Instance.CreateUser(new TenderOwnerUser
-                    {
-                        Name = model.UserName,
-                        Email = model.Email,
-                        Status = UserStatus.NewInactive
-                    }, model.Password);
+                    model.User.Status = UserStatus.NewInactive;
 
-                    CurrentUser = createdUser;
+                    OnLogin(Repository.Instance.CreateUser(model.User, model.Password), false);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -160,20 +154,15 @@ namespace Przetargi.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult RegisterAttendee(RegisterModel model)
+        public ActionResult RegisterAttendee(RegisterAttendeeModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var createdUser = Repository.Instance.CreateUser(new TenderAttendeeUser
-                    {
-                        Name = model.UserName,
-                        Email = model.Email,
-                        Status = UserStatus.NewInactive
-                    }, model.Password);
+                    model.User.Status = UserStatus.NewInactive;
 
-                    CurrentUser = createdUser;
+                    OnLogin(Repository.Instance.CreateUser(model.User, model.Password), false);
 
                     return RedirectToAction("Index", "Home");
                 }

@@ -1,0 +1,80 @@
+﻿@model Przetargi.Models.ParticipateViewModel
+
+@{
+    ViewBag.Title = "Weź udział w przetargu";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model.Result == Przetargi.Models.ParticipateResult.Success)
+{
+    <div class="postSuccess message-info">Twoja oferta została dodana.</div>
+}
+else if (Model.Result != Przetargi.Models.ParticipateResult.None)
+{
+    <div class="postError message-info">
+    @if (Model.Result == Przetargi.Models.ParticipateResult.FailureCantParticipateTwice)
+    {
+        <text>Nie możesz złożyć oferty, ponieważ istnieje już Twoja oferta do tego przetargu.</text>
+    }
+    else if (Model.Result == Przetargi.Models.ParticipateResult.FailureNoDocument)
+    {
+        <text>Aby złożyć ofertę, musisz przesłać dokument z jej specyfikacją.</text>
+    }
+    else if (Model.Result == Przetargi.Models.ParticipateResult.FailureInternalError)
+    {
+        <text>Wystąpił błąd wewnętrzny w trakcie dodawania oferty. Odczekaj chwilę i spróbuj ponownie.</text>
+    }
+    </div>
+}
+
+@using (Html.BeginForm("Participate", "Tender", FormMethod.Post, new { enctype = "multipart/form-data", id = "submitForm" }))
+{
+    @Html.HiddenFor(m => m.AttendeeId)
+    @Html.HiddenFor(m => m.Tender.Id)
+    <div id="price" class="inputRow">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price)
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+    <div class="inputRow input-append">
+        <a id="file" class="button green radius tiny">Wgraj</a> dokument
+        <input disabled="disabled" id="selectedFile" type="text">
+    </div>
+    <div id="confirm" class="inputRow">
+        <a class="button blue radius tiny" href="javascript:void(0);">Zatwierdź</a>
+        <input id="submit" type="submit" value="Zatwierdź" />
+    </div>
+    <input id="file" type="file" name="file">
+}
+
+@section Scripts { 
+    <script type="text/javascript">
+        $('#file').click(function () {
+            $('input#file').click()
+        }).show();
+
+        $('#confirm a').click(function () {
+            $('#submit').click();
+        });
+
+        $('input#file').change(function () {
+            var path = $(this).val().split('\\');
+            $('#selectedFile').val(path[path.length-1]);
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        input#file { display:none; }
+        a#file { display:inline-table !important; }
+        #submit { display: none; }
+        #confirm a { width: 80px; }
+        .tiny { padding: 4px 21px 5px !important; font-size: 1.0em !important; width: 80px !important; }
+        div.inputRow { height: 30px; margin-top: 30px; }
+        
+        .postSuccess { background-color: #ACA; margin-top: 15px; }
+        .postError { background-color: #CAA; margin-top: 15px; }
+    </style>
+}

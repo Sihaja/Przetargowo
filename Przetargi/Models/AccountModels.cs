@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using Przetargi.DataAccess.Models.Users;
 
 namespace Przetargi.Models
 {
@@ -41,20 +42,32 @@ namespace Przetargi.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterModel
+    public abstract class RegisterModel
     {
-        [Required]
-        [StringLength(30, ErrorMessage = "{0} musi składać się przynajmniej z {2} znaków.", MinimumLength = 3)]
-        [Display(Name = "Nazwa użytkownika")]
-        public string UserName { get; set; }
+    }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Adres Email")]
-        public string Email { get; set; }
+    public class RegisterAttendeeModel
+    {
+        public TenderAttendeeUser User { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "{0} musi składać się przynajmniej z {2} znaków.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Hasło")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Potwierdź hasło")]
+        [Compare("Password", ErrorMessage = "Hasło i jego potwierdzenie muszą być identyczne.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+    public class RegisterOwnerModel
+    {
+        public TenderOwnerUser User { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} musi składać się z {2}-{1} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }

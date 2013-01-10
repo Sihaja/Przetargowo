@@ -15,7 +15,7 @@ namespace Przetargi.ExternalAccess.Email
         private static readonly int MailingPort = 587;
         private static readonly string MailingUser = "przetargowo.pl@gmail.com";
         private static readonly string MailingDisplayUser = "Przetargowo.pl";
-        private static readonly string MailingPassword = "niepowiem";
+        private static readonly string MailingPassword = "przetargi88";
 
         public MessageBase SendMail(IEnumerable<string> to, string subject, string body)
         {

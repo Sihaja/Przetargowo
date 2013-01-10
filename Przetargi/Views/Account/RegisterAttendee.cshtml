@@ -1,4 +1,4 @@
-﻿@model Przetargi.Models.RegisterModel
+﻿@model Przetargi.Models.RegisterAttendeeModel
 
 @{
     ViewBag.Title = "Register";
@@ -17,15 +17,23 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
+        <legend>Formularz rejestracji</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.LabelFor(m => m.User.Name)
+                @Html.TextBoxFor(m => m.User.Name)
             </li>
             <li>
-                @Html.LabelFor(m => m.Email)
-                @Html.TextBoxFor(m => m.Email)
+                @Html.LabelFor(m => m.User.Email)
+                @Html.TextBoxFor(m => m.User.Email)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.FirstName)
+                @Html.TextBoxFor(m => m.User.FirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.LastName)
+                @Html.TextBoxFor(m => m.User.LastName)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
@@ -36,7 +44,7 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Zarejestruj" />
     </fieldset>
 }
 

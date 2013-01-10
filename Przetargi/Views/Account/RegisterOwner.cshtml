@@ -1,4 +1,4 @@
-﻿@model Przetargi.Models.RegisterModel
+﻿@model Przetargi.Models.RegisterOwnerModel
 
 @{
     ViewBag.Title = "Register";
@@ -17,26 +17,64 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
+        <legend>Formularz rejestracji</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.LabelFor(m => m.User.Name)
+                @Html.TextBoxFor(m => m.User.Name)
+                @Html.ValidationMessageFor(m => m.User.Name)
             </li>
             <li>
-                @Html.LabelFor(m => m.Email)
-                @Html.TextBoxFor(m => m.Email)
+                @Html.LabelFor(m => m.User.Email)
+                @Html.TextBoxFor(m => m.User.Email)
+                @Html.ValidationMessageFor(m => m.User.Email)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.FirstName)
+                @Html.TextBoxFor(m => m.User.FirstName)
+                @Html.ValidationMessageFor(m => m.User.FirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.LastName)
+                @Html.TextBoxFor(m => m.User.LastName)
+                @Html.ValidationMessageFor(m => m.User.LastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.CompanyName)
+                @Html.TextBoxFor(m => m.User.CompanyName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.TelephoneNumber)
+                @Html.TextBoxFor(m => m.User.TelephoneNumber)
+                @Html.ValidationMessageFor(m => m.User.TelephoneNumber)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.NIP)
+                @Html.TextBoxFor(m => m.User.NIP)
+                @Html.ValidationMessageFor(m => m.User.NIP)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.KRS)
+                @Html.TextBoxFor(m => m.User.KRS, new { style = "width:50px" }) Wydział Gospodarczy KRS
+                @Html.ValidationMessageFor(m => m.User.KRS)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.User.REGON)
+                @Html.TextBoxFor(m => m.User.REGON)
+                @Html.ValidationMessageFor(m => m.User.REGON)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
             </li>
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Zarejestruj" />
     </fieldset>
 }
 
